@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	html {
+		width: 100%;
+		height: 100%;
+	}
+	body {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">玩鞋后台管理</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item"><a href="">控制台</a></li>
+				<li class="layui-nav-item"><a href="">商品管理</a></li>
+				<li class="layui-nav-item"><a href="">用户</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">其它系统</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">邮件管理</a></dd>
+						<dd><a href="">消息管理</a></dd>
+						<dd><a href="">授权管理</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<!-- <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> -->
+						管理员：
+						<span id="adminname">{$Think.session.adminname}</span>
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a id="updataadmin">基本资料</a></dd>
+						<dd><a id="updatapwd">密码设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="">
+						<span id="exit">退了</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+				
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+					<li class="layui-nav-item">
+						<a class="" href="javascript:;">商品类型管理</a>
+						<dl class="layui-nav-child">
+							<dd><a id="alltype" href="javascript:;">商品分类</a></dd>
+							<dd><a id="brand" href="javascript:;">品牌分类</a></dd>
+							<dd><a id="color" href="javascript:;">颜色分类</a></dd>
+							<dd><a id="size" href="javascript:;">尺寸分类</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">商品管理</a>
+						<dl class="layui-nav-child">
+							<dd><a id="allproduct" href="javascript:;">所有商品</a></dd>
+							<dd><a id="addproduct" href="javascript:;">添加商品</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a class="" href="javascript:;">用户管理</a>
+						<dl class="layui-nav-child">
+							<dd><a id="alluser" href="javascript:;">所有用户</a></dd>
+							<dd><a id="address" href="javascript:;">用户地址</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a class="" href="javascript:;">订单管理</a>
+						<dl class="layui-nav-child">
+							<dd><a id="allorder" href="javascript:;">所有订单</a></dd>
+							<dd><a id="orderdetail" href="javascript:;">订单详情</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a class="" href="javascript:;">权限管理</a>
+						<dl class="layui-nav-child">
+							<dd><a id="permission" href="javascript:;">查看权限</a></dd>
+							<dd><a id="admin" href="javascript:;">查看管理员</a></dd>
+							<dd><a id="group" href="javascript:;">管理分组</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+				
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<iframe id="myiframe" src="welcome" frameborder="0" width="100%" height="100%"></iframe>
+		</div>
+				
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			底部固定区域
+		</div>
+	</div>
+			
+	<!-- <script src="__ROOT__/static/layui/layui.all.js"></script> -->
+	<script src="__STATIC__/layui/layui.js"></script>
+	<script>
+		layui.use('element', function(){
+			var element = layui.element;
+		});
+	</script>
+
+	<script>
+		// 退出登录
+		$('#exit').on('click', function() {
+			$.ajax({
+				type: "post",
+				url: "exit"
+			})
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('.layui-nav-more').on('click', function() {
+				if($(this).parent().parent().hasClass('layui-nav-itemed')) {
+					$(this).parent().parent().removeClass('layui-nav-itemed')
+				} else {
+					$(this).parent().parent().addClass('layui-nav-itemed')
+				}	
+			})
+
+			// 跳转到修改资料
+			$('#updataadmin').on('click', function() {
+				$('#myiframe').attr('src', '../index/updataadmin')
+			})
+
+			// 跳转到修改密码
+			$('#updatapwd').on('click', function() {
+				$('#myiframe').attr('src', '../index/updatapwd')
+			})
+
+			// 跳转到所有类型
+			$('#alltype').on('click', function() {
+				$('#myiframe').attr('src', '../Type/index')
+			})
+
+			// 跳转到品牌分类
+			$('#brand').on('click', function() {
+				$('#myiframe').attr('src', '../Brand/index')
+			})
+
+			// 跳转到颜色分类
+			$('#color').on('click', function() {
+				$('#myiframe').attr('src', '../Color/index')
+			})
+
+			// 跳转到尺寸分类
+			$('#size').on('click', function() {
+				$('#myiframe').attr('src', '../Size/index')
+			})
+
+			// 跳转到所有商品
+			$('#allproduct').on('click', function() {
+				$('#myiframe').attr('src', '../Product/index')
+			})
+
+			// 跳转到添加商品
+			$('#addproduct').on('click', function() {
+				$('#myiframe').attr('src', '../Product/addproduct')
+			})
+
+			// 跳转到多有订单
+			$('#allorder').on('click', function() {
+				$('#myiframe').attr('src', '../Order/index')
+			})
+
+			// 跳转到订单详情
+			$('#orderdetail').on('click', function() {
+				$('#myiframe').attr('src', '../Order/detail')
+			})
+
+			// 跳转到所有用户
+			$('#alluser').on('click', function() {
+				$('#myiframe').attr('src', '../User/index')
+			})
+
+			// 跳转到用户地址
+			$('#address').on('click', function() {
+				$('#myiframe').attr('src', '../User/address')
+			})
+
+			// 跳转到查看管理员
+			$('#admin').on('click', function() {
+				$('#myiframe').attr('src', '../Permission/admin')
+			})
+
+			// 跳转到管理分组
+			$('#group').on('click', function() {
+				$('#myiframe').attr('src', '../Permission/group')
+			})
+
+			// 跳转到查看权限
+			$('#permission').on('click', function() {
+				$('#myiframe').attr('src', '../Permission/permission')
+			})
+		})
+	</script>
+
+</body>
+</html>

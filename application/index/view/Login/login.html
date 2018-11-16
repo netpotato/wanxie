@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__STATIC__/mycss/updown.css">
+	<style>
+		.container {
+			width: 100%;
+			height: 100%;
+			background: url('__STATIC__/ui/reg/012.png');
+			background-repeat: no-repeat;
+  			background-size: cover;
+  			position: relative;
+		}
+
+		.underpic {
+			width: 430px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.bgimg {
+			width: 100%;
+			height: 620px;
+		}
+		
+		.main {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			text-align: center;
+		}
+
+		.main > div {
+			margin-left: auto;
+		}
+
+		.welcome {
+			height: 40px;
+			margin-top: 100px;
+		}
+
+		.welcome div {
+			float: left;
+			line-height: 40px;
+			margin-left: 28%;
+		}
+
+		.welcome img {
+			float: left;
+			margin-top: 8px;
+			margin-left: 3%;
+		}
+
+		.phone input,
+		.password input,
+		.queren input {
+			width: 321px;
+			height: 38px;
+			box-shadow: 0px 0px 2px 0px 
+			rgba(0, 0, 0, 0.3);
+			border: solid 0px #cccccc;
+			text-indent: 10px;
+			margin-top: 24px;
+		}
+
+		.code {
+			height: 38px;
+			margin-top: 24px;
+		}
+
+		.code input {
+			width: 200px;
+			height: 38px;
+			box-shadow: 0px 0px 2px 0px 
+			rgba(0, 0, 0, 0.3);
+			border: solid 0px #cccccc;
+			text-indent: 10px;
+			float: left;
+			margin-left: 13%;
+		}
+
+		.code div {
+			float: left;
+			width: 120px;
+			height: 38px;
+			line-height: 38px;
+			background-color: #ce3d3a;
+			cursor: pointer;
+			font-size: 14px;
+			color: #fff;
+		}
+
+		.agree {
+			margin-top: 20px;
+		}
+		
+		.agree span {
+			font-size: 14px;
+			color: #333;
+		}
+
+		.login {
+			width: 320px;
+			height: 38px;
+			line-height: 38px;
+			background-color: #ce3d3a;
+			border-radius: 4px;
+			font-size: 16px;
+			color: #fff;
+			margin-top: 24px;
+			margin-right: auto;
+			cursor: pointer;
+		}
+
+		.reg {
+			font-size: 16px;
+			color: #333;
+			margin-top: 24px;
+			cursor: pointer;
+		}
+
+		.reg a {
+			text-decoration: none;
+			color: #333;
+		}
+
+		.reg a:hover {
+			color: #ce3d3a;
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	
+	<!-- 顶部 -->
+	<div class="top">
+		<div>
+			<a href="{:url('index/login/login')}">登录</a> /
+			<a href="{:url('index/login/index')}">注册</a>
+		</div>
+		<div>订单</div>
+		<div>收藏</div>
+		<div>帮助中心</div>
+	</div>
+
+	<!-- 导航栏 -->
+	<div class="nav">
+		<div class="logo">
+			<img src="__STATIC__/ui/reg/013.png" alt="">
+		</div>
+		<div class="navs"><a href="{:url('index/index/index')}">首页</a></div>
+		<div class="navs"><a href="{:url('index/type/index', ['type' => '1'])}">男鞋</a></div>
+		<div class="navs"><a href="{:url('index/type/index', ['type' => '0'])}">女鞋</a></div>
+		<div class="navs"><a href="{:url('index/personal/index')}">私人订制</a></div>
+		<div class="navs"><a href="">WanXieAPP</a></div>
+		<div class="search">
+			<input type="text">
+			<div class="searchbtn">搜索</div>
+		</div>
+	</div>
+
+	<!-- 主体 -->
+	<div class="container">
+		<div class="underpic">
+			<img class="bgimg" src="__STATIC__/ui/reg/017.png" alt="">
+			<div class="main">
+				<div class="welcome">
+					<div>欢迎加入</div>
+					<img src="__STATIC__/ui/reg/0110.png" alt="">
+				</div>
+				<div class="phone">
+					<input type="text" name="phone" placeholder="用户名">
+				</div>
+				<div class="password">
+					<input type="password" name="password" placeholder="密码">
+				</div>
+				<div class="code">
+					<input type="text" placeholder="手机验证码" name="sure">
+					<div>获取验证码</div>
+				</div>
+				<div id="login" class="login">立即登录</div>
+				<div class="reg"><a href="{:url('index/login/index')}">没有账号？立即注册</a></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="bottom-up">
+			<div class="lists">
+				<div>电子礼品卡</div>
+				<div>附近商店</div>
+				<div>订阅电子邮件</div>
+				<div>注册NIKE会员</div>
+				<div>网站反馈</div>
+			</div>
+			<div class="lists">
+				<div>获得帮助</div>
+				<div>订单状态</div>
+				<div>配送方式</div>
+				<div>退换货</div>
+				<div>付款选项</div>
+				<div>联系我们</div>
+			</div>
+			<div class="lists">
+				<div>关于</div>
+				<div>新闻</div>
+				<div>投资者</div>
+				<div>招贤纳士</div>
+				<div>新品预览</div>
+			</div>
+			<div class="app">
+				<div class="app-bt">下载WanXie官方APP</div>
+				<div class="app-st">进一步了解我们</div>
+				<img src="__STATIC__/ui/reg/011.png" alt="">
+			</div>
+			<div class="wx">
+				<img src="__STATIC__/ui/reg/018.png" alt="">
+				<img src="__STATIC__/ui/reg/016.png" alt="">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="foot">
+			<img src="__STATIC__/ui/reg/0111.png" alt="">
+			<span>中国大陆</span>
+			<span>2017 WX,lnc,保留所有权利</span>
+			<span>分类浏览</span>
+			<span>使用条款</span>
+			<span>隐私政策</span>
+			<span>沪ICP备14009339号</span>
+			<img src="__STATIC__/ui/reg/014.png" alt="">
+			<span>上海工商</span>
+			<img src="__STATIC__/ui/reg/015.png" alt="">
+			<span>沪公网安备31011002000177号</span>
+		</div>	
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#login').on('click', function() {
+				var username = $('input[name="phone"]').val()
+				var userpwd = $('input[name="password"').val()
+				$.ajax({
+					type: "POST",
+					url: "tologin",
+					data: "username=" + username + "&userpwd=" + userpwd,
+					success: function(data) {
+						if(data == 22) {
+							alert("用户名不存在")
+						} else if(data == 11) {
+							alert("密码错误")
+						} else if(data == 1) {
+							window.location.href = '{:url("index/index/index")}'
+						}
+					}
+				})
+			})
+		})
+	</script>
+
+</body>
+</html>

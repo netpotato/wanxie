@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	html {
+		width: 100%;
+		height: 100%;
+	}
+	body {
+		width: 100%;
+		height: 100%;
+		overflow-y: hidden;
+	}
+</style>
+<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<table id="mytable" class="layui-table" lay-even="" lay-skin="row" style="margin-top: 5px">
+		<colgroup>
+		    <col width="150">
+		    <col width="150">
+		    <col width="150">
+		</colgroup>
+		<thead>
+		    <tr>
+			    <th>权限编号</th>
+			    <th>权限名称</th>
+			    <th>权限说明</th>
+		    </tr> 
+		</thead>
+		<tbody>
+		    {volist id='permissions' name='permissions'}
+				<tr>
+					<td>{$permissions.pid}</td>
+					<td>{$permissions.pname}</td>
+					<td>{$permissions.pnote}</td>
+				</tr>
+		    {/volist}
+		</tbody>
+	</table>
+</body>
+</html>

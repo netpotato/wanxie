@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__STATIC__/mycss/updown.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+		}
+
+		#cart {
+			color: red;
+		}
+
+		.content {
+			width: 100%;
+			height: 450px;
+			margin-top: 40px;
+			margin-bottom: 70px;
+		}
+
+		.left {
+			width: 15%;
+			height: 100%;
+			float: left;
+			margin-left: 10%;
+			background-color: #f4f5f5;
+		}
+
+		.left div {
+			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: center;
+			cursor: pointer;
+			font-size: 18px;
+		}
+
+		.left div a {
+			text-decoration: none;
+			color: #333;
+		}
+
+		.left div a:hover {
+			color: #138b8b;
+		}
+
+		.right {
+			width: 58%;
+			height: 100%;
+			float: left;
+			/*background-color: #777;*/
+			margin-left: 7%;
+			overflow-y: auto;
+		}
+
+		.left div:nth-child(4) a {
+			color: #138b8b;
+		}
+
+		.address {
+			width: 45%;
+			height: 75px;
+			margin-bottom: 20px;
+			float: left;
+			margin-left: 20px;
+			cursor: pointer;
+			border: 1px dotted red;
+			border-radius: 10px;
+		}
+
+		.address:hover {
+			border-style: solid;
+			background-color: rgba(200, 30, 30, .1);
+		}
+
+		.address div {
+			margin-left: 10px;
+			height: 24px;
+			line-height: 24px;
+			font-size: 14px;
+			color: #333;
+		}
+
+		.addaddress {
+			width: 100px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			border: 1px solid #000;
+			margin-left: 40px;
+			text-indent: 0;
+			background-color: #138b8b;
+			color: #fff;
+			cursor: pointer;
+			float: left;
+			border-radius: 10px;
+		}
+
+		#remove {
+			float: right;
+			margin-right: 20px;
+		}
+
+		#remove:hover {
+			font-size: 15px;
+			color: #222;
+		}
+
+		h4{
+		    margin-left: 20px;
+		}
+		p{
+		    text-align: center;
+		}
+		.addaddress{
+		    width: 100px;
+		    height: 35px;
+		    border-radius: 5px;
+		    font-size: 16px;
+		    color: white;
+		    background-color: cornflowerblue;
+		}
+		.addaddress:hover, .addaddress:focus{
+		    background-color: #95b4ed;
+		}
+		.modal{
+		    display: none;
+		    width: 100%;
+		    height: 100%;
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    z-index: 1000;
+		    background-color: rgba(0,0,0,0.5);
+		}
+		.modal-content{
+		    display: flex;
+		    flex-flow: column nowrap;
+		    justify-content: space-between;
+		    width: 50%;
+		    max-width: 700px;
+		    height: 50%;
+		    margin: 100px auto;
+		    border-radius:10px;
+		    background-color:#fff;
+		    -webkit-animation: zoom 0.6s;
+		    animation: zoom 0.6s;
+		    resize: both;
+		    overflow: auto;
+		}
+		@-webkit-keyframes zoom{
+		    from {-webkit-transform: scale(0)}
+		    to {-webkit-transform: scale(1)}
+		}
+		@keyframes zoom{
+		    from {transform: scale(0)}
+		    to {transform: scale(1)}
+		}
+		.modal-header{
+		    box-sizing:border-box;
+		    border-bottom:1px solid #ccc;
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		}
+		.close{
+		    color: #b7b7b7;
+		    font-size: 30px;
+		    font-weight: bold;
+		    margin-right: 20px;
+		    transition: all 0.3s;
+		}
+		.close:hover, .close:focus{
+		    color: #95b4ed;
+		    text-decoration: none;
+		    cursor: pointer;
+		}
+		.modal-body{
+		    padding: 10px;
+		    font-size: 16px;
+		    box-sizing:border-box;
+		}
+		.modal-footer{
+		    box-sizing:border-box;
+		    border-top:1px solid #ccc;
+		    display: flex;
+		    padding: 15px;
+		    justify-content: flex-end;
+		    align-items: center;
+		}
+		.modal-footer button{
+		    width: 60px;
+		    height: 35px;
+		    padding: 5px;
+		    box-sizing: border-box;
+		    margin-right: 10px;
+		    font-size: 16px;
+		    color: white;
+		    border-radius: 5px;
+		    background-color: cornflowerblue;
+		}
+		.modal-footer button:hover, .modal-footer button:focus{
+		    background-color: #95b4ed;
+		    cursor: pointer;
+		}
+		@media only screen and (max-width: 700px){
+		    .modal-content {
+		        width: 80%;
+		    }
+		}
+	
+		.modal {
+			text-align: center;
+			font-size: 14px;
+			color: #333;
+		}
+
+		.modalbody div {
+			width: 100%;
+			display: inline-block;
+			margin-bottom: 10px;
+			margin-top: 2px;
+		}
+
+		.modalbody div input {
+			width: 200px;
+			height: 30px;
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<!-- 顶部 -->
+	<div class="top">
+		<div class="notuser">
+			<a href="{:url('index/login/login')}">登录</a> /
+			<a href="{:url('index/login/index')}">注册</a>
+		</div>
+		<div class="user">
+			用户名: 
+			<span id="username" class="username">{$Think.session.username}</span>
+			<span id="exit" class="exit">退出登录</span>
+		</div>
+		<div id="cart">用户信息</div>
+		<div>收藏</div>
+		<div>帮助中心</div>
+	</div>
+
+	<!-- 导航栏 -->
+	<div class="nav">
+		<div class="logo">
+			<img src="__STATIC__/ui/reg/013.png" alt="">
+		</div>
+		<div class="navs"><a href="{:url('index/index/index')}">首页</a></div>
+		<div class="navs"><a href="{:url('index/type/index')}">男鞋</a></div>
+		<div class="navs"><a href="{:url('index/type/female')}">女鞋</a></div>
+		<div class="navs"><a href="{:url('index/personal/index')}">私人订制</a></div>
+		<div class="navs"><a href="">WanXieAPP</a></div>
+		<div class="search">
+			<input type="text">
+			<div class="searchbtn">搜索</div>
+		</div>
+	</div>
+
+	<!-- 主体 -->
+	<div class="content">
+		<div class="left">
+			<div><a href="{:url('index/User/index')}">个人信息</a></div>
+			<div><a href="{:url('index/User/cart')}">购物车</a></div>
+			<div><a href="{:url('index/User/order')}">我的订单</a></div>
+			<div><a href="{:url('index/User/address')}">收货地址</a></div>
+			<div><a href="">我的卡卷</a></div>
+			<div><a href="">在线客服</a></div>
+		</div>
+		<div class="right">
+			{volist id="address" name="address"}
+				<div class="address" data-id="{$address.addressid}">
+					<div>地区：
+						<span class="addressarea">{$address.addressarea}</span>（
+						<span class="nickname">{$address.nickname}</span>）
+					</div>
+					<div>详细地址：
+						<span class="addressdetail">{$address.addressdetail}</span>
+					</div>
+					<div>电话：
+						<span class="phone">{$address.phone}</span>
+						<span id="remove">删除该地址</span>
+					</div>
+				</div>
+			{/volist}		
+			<div class="addaddress" id="showModel">增添地址</div>
+		</div>
+	</div>
+
+	<!-- 模态框 -->
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<header class="modal-header">
+				<h4>增添新地址</h4>
+				<span class="close">×</span>
+			</header>
+			<div class="modalbody">
+				<div>
+					地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：&nbsp;&nbsp;
+					<input type="text" name="addressarea" placeholder="请输入省市区(县)">
+				</div>
+				<div>
+					详细地址：&nbsp;&nbsp;
+					<input type="text" name="addressdetail" placeholder="请输入详细地址">
+				</div>
+				<div>
+					邮政编号：&nbsp;&nbsp;
+					<input type="text" name="postal" placeholder="请输入邮政编码">
+				</div>
+				<div>
+					姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：&nbsp;&nbsp;
+					<input type="text" name="nickname" placeholder="请输入收件人名称">
+				</div>
+				<div>
+					手机号码：&nbsp;&nbsp;
+					<input type="text" name="phone" placeholder="请输入收件人电话号码">
+				</div>
+			</div>
+			<footer class="modal-footer">
+				<button id="cancel">取消</button>
+				<button id="addaddress">添加</button>
+			</footer>
+		</div>
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="bottom-up">
+			<div class="lists">
+				<div>电子礼品卡</div>
+				<div>附近商店</div>
+				<div>订阅电子邮件</div>
+				<div>注册NIKE会员</div>
+				<div>网站反馈</div>
+			</div>
+			<div class="lists">
+				<div>获得帮助</div>
+				<div>订单状态</div>
+				<div>配送方式</div>
+				<div>退换货</div>
+				<div>付款选项</div>
+				<div>联系我们</div>
+			</div>
+			<div class="lists">
+				<div>关于</div>
+				<div>新闻</div>
+				<div>投资者</div>
+				<div>招贤纳士</div>
+				<div>新品预览</div>
+			</div>
+			<div class="app">
+				<div class="app-bt">下载WanXie官方APP</div>
+				<div class="app-st">进一步了解我们</div>
+				<img src="__STATIC__/ui/reg/011.png" alt="">
+			</div>
+			<div class="wx">
+				<img src="__STATIC__/ui/reg/018.png" alt="">
+				<img src="__STATIC__/ui/reg/016.png" alt="">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="foot">
+			<img src="__STATIC__/ui/reg/0111.png" alt="">
+			<span>中国大陆</span>
+			<span>2017 WX,lnc,保留所有权利</span>
+			<span>分类浏览</span>
+			<span>使用条款</span>
+			<span>隐私政策</span>
+			<span>沪ICP备14009339号</span>
+			<img src="__STATIC__/ui/reg/014.png" alt="">
+			<span>上海工商</span>
+			<img src="__STATIC__/ui/reg/015.png" alt="">
+			<span>沪公网安备31011002000177号</span>
+		</div>	
+	</div>
+
+
+<script>
+	$(document).ready(function() {
+		// 登录未登录
+		var userid = "{$Think.session.userid}"
+			if(userid == '') {
+				$('.notuser').show()
+				$('.user').hide()
+			} else {
+				$('.notuser').hide()
+				$('.user').show().css('margin-left', '60%')
+			}
+
+		// 退出登录
+		$('#exit').on('click', function() {
+			$.ajax({
+				type: "post",
+				url: "index/index/exit",
+				success: function(data) {
+					$('.notuser').show()
+					$('.user').hide()
+				}
+			})
+		})
+
+		// 跳转到用户
+		$('#cart').on('click', function() {
+			var username = "{$Think.session.username}"
+			window.location.href = '{:url("index/User/index")}'
+		})
+
+		// 模态框
+		$('#showModel').on('click', function() {
+			$('#modal').show()
+		})
+		$('#cancel').on('click', function() {
+			$('#modal').hide()
+		})
+		$('.close').on('click', function() {
+			$('#modal').hide()
+		})
+
+		// 添加地址
+		$('#addaddress').on('click', function() {
+			var addressarea = $('input[name="addressarea"]').val()
+			var addressdetail = $('input[name="addressdetail"]').val()
+			var postal = $('input[name="postal"]').val()
+			var nickname = $('input[name="nickname"]').val()
+			var phone = $('input[name="phone"]').val()
+
+			var str = "addressarea=" + addressarea + "&addressdetail=" + addressdetail + "&postal=" + postal + "&nickname=" + nickname + "&phone=" + phone
+
+			$.ajax({
+				type: "post",
+				url: "addaddress",
+				data: str,
+				success: function(data) {
+					if(data == 1) {
+						location.reload()
+					}
+				}
+			})
+		})
+
+		// 删除地址
+		$('.right').on('click', '#remove', function() {
+			var addressid = $(this).parent().parent().attr('data-id')
+
+			var r = confirm('确认删除？')
+
+			if(r == true) {
+				$.ajax({
+					type: "post",
+					url: "removeaddress",
+					data: "addressid=" + addressid,
+					success: function(data) {
+						if(data == 1) {
+							location.reload()
+						}
+					}
+				})
+			}
+		})
+
+		// 默认地址
+		$('.address').each(function() {
+			if($(this).attr("data-id") == "{$Think.session.addressid}") {
+				$(this).css('background-color', 'rgba(200, 30, 30, .4)')
+			}
+		})
+
+		// 选择本次登录使用的地址
+		$('.address').on('click', function() {
+			var addressid = $(this).attr('data-id')
+			
+			$.ajax({
+				type: "post",
+				url: "setdefaddress",
+				data: "addressid=" + addressid,
+				success: function() {
+					location.reload()
+				}
+			})
+		})
+	})
+</script>
+</body>
+</html>

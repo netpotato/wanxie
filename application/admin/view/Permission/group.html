@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	html {
+		width: 100%;
+		height: 100%;
+	}
+	body {
+		width: 100%;
+		height: 100%;
+		overflow-y: hidden;
+	}
+</style>
+<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<table id="mytable" class="layui-table" lay-even="" lay-skin="row" style="margin-top: 5px">
+		<colgroup>
+		    <col width="200">
+		    <col width="200">
+		    <col width="200">
+		    <col width="200">
+		</colgroup>
+		<thead>
+		    <tr>
+			    <th>分组编号</th>
+			    <th>分组名称</th>
+			    <th>拥有权限</th>
+			    <th>操作</th>
+		    </tr> 
+		</thead>
+		<tbody>
+		    {volist id='groups' name='groups'}
+				<tr>
+					<td>{$groups.groupid}</td>
+					<td>{$groups.groupname}</td>
+					<td>{$groups.pids}</td>
+					<td>
+						<button id="updatagrouppermission" class="layui-btn layui-btn-xs layui-btn-normal">修改权限</button>
+						<button id="removegroup" class="layui-btn layui-btn-xs layui-btn-normal layui-bg-red">删除分组</button>
+					</td>
+				</tr>
+		    {/volist}
+		</tbody>
+	</table>
+	<button id="addgroup" class="layui-btn" style="margin-left: 20px;">添加分组</button>
+
+	<script>
+		$(document).ready(function() {
+
+			// 跳转到添加
+			$('#addgroup').on('click', function() {
+				location.href = 'addgroup'
+			})
+
+			// 删除分组
+			$('#mytable').on('click', '#removegroup', function() {
+
+				var groupid = $(this).parent().parent().children().eq(0).text()
+
+				var r = confirm('确认删除？')
+
+				if(r == true) {
+					$.ajax({
+						type: "POST",
+						url: "removegroup",
+						data: "groupid=" + groupid,
+						success: function(data) {
+							if (data == 11) {
+								alert("该分组还有成员，不能删除")
+							} else if(data == 1) {
+								location.href = 'group'
+							}
+						}
+					})
+				}
+			})
+
+			// 跳转到修改分组
+			$('#mytable').on('click', '#updatagrouppermission', function() {
+				var groupid = $(this).parent().parent().children().eq(0).text()
+
+				window.location.href = 'updatagroup?groupid=' + groupid
+			})
+		})
+	</script>
+</body>
+</html>

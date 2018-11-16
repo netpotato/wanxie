@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__STATIC__/mycss/updown.css">
+	<style>
+		.content {
+			width: 62.5%;
+			min-width: 900px;
+		}
+
+		.title {
+			margin-left: 30%;
+			font-size: 14px;
+			color: #ce3d3a;
+			cursor: pointer;
+		}
+
+		.show {
+			width: 100%;
+			margin-left: 30%;
+			display: flex;
+			flex-direction: row;
+		}
+
+		.pic {
+			float: left;
+			width: 58%;
+			margin-top: 5%;
+		}
+
+		.small {
+			width: 10.57%;
+			height: 100%;
+			margin-left: 3%;
+			float: left;
+			cursor: pointer;
+		}
+
+		.samll img {
+			margin-top: 20px;
+			float: left;
+		}
+
+		.big {
+			width: 78.57%;
+			margin-left: 7%;
+			float: left;
+		}
+
+		.big img {
+			width: 100%;
+		}
+
+		.sel {
+			float: left;
+			width: 36%;
+			margin-left: 3%;
+		}
+
+		.productname {
+			font-size: 36px;
+			color: #333;
+		}
+
+		.type {
+			font-size: 18px;
+			color: #888;
+		}
+
+		.price {
+			font-size: 26px;
+			color: #888;
+		}
+
+		.price span {
+			font-size: 32px;
+			color: #ce3d3a;
+		}
+
+		.arrow {
+			float: left;
+		}
+
+		.act {
+			height: 70px;
+		}
+
+		.acts {
+			float: left;
+			margin-left: 5px;
+		}
+
+		.acts div {
+			font-size: 12px;
+			color: #666;
+			margin-top: 5px;
+		}
+
+		.acts div span {
+			background-color: red;
+			color: #fff;
+		}
+
+		.color {
+			height: 60px;
+		}
+
+		.color-title {
+			font-size: 14px;
+			color: #666;
+		}
+
+		.color-list {
+			display: flex;
+			float: row;
+			margin-top: 5px;
+		}
+
+		.color-list div {
+			width: 42px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			border: solid 1px #000;
+			margin-left: 5px;
+			cursor: pointer;
+		}
+
+		.size {
+			height: 60px;
+			margin-top: 15px;
+		}
+
+		.size-title {
+			font-size: 14px;
+			color: #666;
+		}
+
+		.size-list {
+			margin-top: 5px;
+		}
+
+		.sizes {
+			float: left;
+			width: 38px;
+			height: 24px;
+			line-height: 24px;
+			text-align: center;
+			border: solid 1px #000;
+			margin-left: 5px;
+			cursor: pointer;
+		}
+
+		.number {
+			height: 40px;
+			line-height: 40px;
+			margin-top: 50px;
+		}
+
+		.number-title {
+			font-size: 14px;
+			color: #666;
+			float: left;
+		}
+
+		.selnum {
+			float: left;
+			display: flex;
+			flex-direction: row;
+			margin-left: 20px;
+		}
+
+		.num-sub {
+			width: 38px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			border: solid 1px #666;
+			border-radius: 3px;
+			cursor: pointer;
+			margin-top: 4px;
+		}
+
+		.num {
+			
+		}
+
+		.num input {
+			width: 74px;
+			height: 32px;
+			box-shadow: 0px 0px 2px 0px 
+			rgba(0, 0, 0, 0.3);
+			border: solid 0px #cccccc;
+			text-indent: 10px;
+		}
+
+		.num-add {
+			width: 38px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			border: solid 1px #666;
+			border-radius: 3px;
+			cursor: pointer;
+			margin-top: 4px;
+		}
+
+		.do {
+			margin-top: 15px;
+			height: 40px;
+		}
+
+		.collect {
+			float: left;
+		}
+
+		.collect-title {
+			float: left;
+			font-size: 14px;
+			color: #666;
+		}
+
+		.collect-img {
+			float: left;
+			width: 19px;
+			margin-left: 5px;
+			cursor: pointer;
+		}
+
+		.share {
+			float: left;
+			margin-left: 30px;
+		}
+
+		.share-title {
+			float: left;
+			font-size: 14px;
+			color: #666;
+		}
+
+		.share-img {
+			float: left;
+			width: 19px;
+			margin-left: 5px;
+			cursor: pointer;
+		}
+
+		.buycart {
+			margin-top: 15px;
+		}
+
+		.buy {
+			width: 140px;
+			height: 30px;
+			border: solid 1px #ce3d3a;
+			line-height: 30px;
+			text-align: center;
+			font-size: 16px;
+			color: #ce3d3a;
+			float: left;
+			cursor: pointer;
+		}
+
+		.addcart {
+			width: 140px;
+			height: 30px;
+			border: solid 1px #ce3d3a;
+			line-height: 30px;
+			text-align: center;
+			background-color: #ce3d3a;
+			font-size: 16px;
+			color: #fff;
+			float: left;
+			margin-left: 15px;
+			cursor: pointer;
+		}
+
+		.detail {
+			width: 100%;
+			margin-left: 30%;
+			margin-top: 100px;
+		}
+
+		.det-sel {
+			width: 100%;
+			height: 40px;
+			border-bottom: 1px solid #d9dbdb;
+		}
+
+		.det-sel div {
+			width: 101px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			background-color: #ccc;
+			cursor: pointer;
+			float: left;
+			font-size: 14px;
+			color: #fff;
+		}
+
+		.det-sel div:nth-child(1) {
+			background-color: #ce3d3a;
+		}
+
+		.det-img {
+			width: 100%;
+		}
+
+		.det-img img {
+			width: 100%;
+		}
+
+		.det-like {
+			width: 100%;
+			margin-top: 50px;
+		}
+
+		.like-sel {
+			width: 101px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			background-color: #ce3d3a;
+			cursor: pointer;
+			font-size: 14px;
+			color: #fff;
+		}
+
+		.shoes {
+			margin-top: 30px;
+			height: 450px;
+			margin-bottom: 100px;
+		}
+
+		.shoe {
+			width: 25%;
+			float: left;
+		}
+
+		.shoe:not(:first-child){
+			margin-left: 2%;
+		}
+
+		.shoe img {
+			width: 100%;
+		}
+
+		.shoe-name {
+			font-size: 18px;
+			color: #333;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+			margin-top: 15px;
+		}
+
+		.shoe-type {
+			font-size: 14px;
+			color: #a19e9e;
+			margin-top: 12px;
+		}
+
+		.shoe-price {
+			font-size: 14px;
+			color: #a19e9e;
+			margin-top: 5px;
+		}
+
+		.shoe-price span {
+			font-size: 18px;
+			color: #333;
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	
+	<!-- 顶部 -->
+	<div class="top">
+		<div class="notuser">
+			<a href="{:url('index/login/login')}">登录</a> /
+			<a href="{:url('index/login/index')}">注册</a>
+		</div>
+		<div class="user">
+			用户名: 
+			<span id="username" class="username">{$Think.session.username}</span>
+			<span id="exit" class="exit">退出登录</span>
+		</div>
+		<div id="cart">用户信息</div>
+		<div>收藏</div>
+		<div>帮助中心</div>
+	</div>
+
+	<!-- 导航栏 -->
+	<div class="nav">
+		<div class="logo">
+			<img src="__STATIC__/ui/reg/013.png" alt="">
+		</div>
+		<div class="navs"><a href="{:url('index/index/index')}">首页</a></div>
+		<div class="navs"><a href="{:url('index/type/index')}">男鞋</a></div>
+		<div class="navs"><a href="{:url('index/type/female')}">女鞋</a></div>
+		<div class="navs"><a href="{:url('index/personal/index')}">私人订制</a></div>
+		<div class="navs"><a href="">WanXieAPP</a></div>
+		<div class="search">
+			<input type="text">
+			<div class="searchbtn">搜索</div>
+		</div>
+	</div>
+
+	<!-- 商品详情 -->
+	<div class="content">
+		<div class="title">
+			{switch $detail.sex}
+				{case 1}男鞋{/case}
+				{case 0}女鞋{/case}
+				{case 2}男女鞋{/case}
+			{/switch} / 
+			{$detail.typename} / 
+			{$detail.productname}
+		</div>
+		<div class="show">
+			<div class="pic">
+				<div class="small">
+					<img src="__STATIC__/ui/detail/0110.png" width="100%" alt="">
+					<img src="__STATIC__/ui/detail/016.png" width="100%" alt="">
+					<img src="__STATIC__/ui/detail/011.png" width="100%" alt="">
+					<img src="__STATIC__/ui/detail/012.png" width="100%" alt="">
+					<img src="__STATIC__/ui/detail/013.png" width="100%" alt="">
+				</div>
+				<div class="big">
+					<img id="bigimg" src="__STATIC__{$detail.imgurl}" width="100%" alt="">
+				</div>
+			</div>
+			<div class="sel">
+				<div class="productname" data-id="">{$detail.productname}</div>
+				<div class="type">{$detail.typename}</div>
+				<div class="price">
+					￥<span id="price">{$detail.productprice}</span>
+				</div>
+				<div class="act">
+					<div class="arrow"><img src="__STATIC__/ui/detail/0112.png" alt=""></div>
+					<div class="acts">
+						<div><span>免运费</span>免运费</div>
+						<div><span>满减</span>满699减20元</div>
+						<div><span>满减</span>满1400减200元</div>
+					</div>
+				</div>
+				<div class="color">
+					<div class="color-title">颜色</div>
+					<div id="colors" class="color-list">
+						{volist id="colors" name="colors"}
+							<div class="color" style="background-color: {$colors.colornote}" title="{$colors.colorname}"></div>
+						{/volist}
+					</div>
+				</div>
+				<div class="size">
+					<div class="size-title">尺寸</div>
+					<div id="sizes" class="size-list">
+						{volist id="sizes" name="sizes"}
+							<div class="sizes">{$sizes.sizename}</div>
+						{/volist}
+					</div>
+				</div>
+				<div class="number">
+					<div class="number-title">数量</div>
+					<div class="selnum">
+						<div id="subnum" class="num-sub">-</div>
+						<div class="num">
+							<input id="num" type="number" value="1" name="num" min="1">
+						</div>
+						<div id="addnum" class="num-add">+</div>
+					</div>
+				</div>
+				<div class="do">
+					<div class="collect">
+						<div class="collect-title">收藏</div>
+						<div class="collect-img"><img src="__STATIC__/ui/detail/015.png" alt=""></div>
+					</div>
+					<div class="share">
+						<div class="share-title">分享</div>
+						<div class="share-img"><img src="__STATIC__/ui/detail/014.png" alt=""></div>
+					</div>
+				</div>
+				<div class="buycart">
+					<div class="buy">立即购买</div>
+					<div id="addcart" class="addcart">加入购物车</div>
+				</div>
+			</div>
+		</div>
+		<div class="detail">
+			<div class="det-sel">
+				<div>商品详情</div>
+				<div>用户评价</div>
+			</div>
+			<div class="det-img">
+				<img src="__STATIC__/ui/detail/0111.png" alt="">
+			</div>
+			<div class="det-like">
+				<div class="like-sel">猜你喜欢</div>
+				<div class="shoes">
+					<div class="shoe">
+						<img src="__STATIC__/ui/detail/017.png" alt="">
+						<div class="shoe-name"></div>
+						<div class="shoe-type">男子运动鞋</div>
+						<div class="shoe-price">￥<span>1599</span></div>
+					</div>
+					<div class="shoe">
+						<img src="__STATIC__/ui/detail/018.png" alt="">
+						<div class="shoe-name">Nike Air VaporMax Flyknit</div>
+						<div class="shoe-type">男子运动鞋</div>
+						<div class="shoe-price">￥<span>1599</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="bottom-up">
+			<div class="lists">
+				<div>电子礼品卡</div>
+				<div>附近商店</div>
+				<div>订阅电子邮件</div>
+				<div>注册NIKE会员</div>
+				<div>网站反馈</div>
+			</div>
+			<div class="lists">
+				<div>获得帮助</div>
+				<div>订单状态</div>
+				<div>配送方式</div>
+				<div>退换货</div>
+				<div>付款选项</div>
+				<div>联系我们</div>
+			</div>
+			<div class="lists">
+				<div>关于</div>
+				<div>新闻</div>
+				<div>投资者</div>
+				<div>招贤纳士</div>
+				<div>新品预览</div>
+			</div>
+			<div class="app">
+				<div class="app-bt">下载WanXie官方APP</div>
+				<div class="app-st">进一步了解我们</div>
+				<img src="__STATIC__/ui/reg/011.png" alt="">
+			</div>
+			<div class="wx">
+				<img src="__STATIC__/ui/reg/018.png" alt="">
+				<img src="__STATIC__/ui/reg/016.png" alt="">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="foot">
+			<img src="__STATIC__/ui/reg/0111.png" alt="">
+			<span>中国大陆</span>
+			<span>2017 WX,lnc,保留所有权利</span>
+			<span>分类浏览</span>
+			<span>使用条款</span>
+			<span>隐私政策</span>
+			<span>沪ICP备14009339号</span>
+			<img src="__STATIC__/ui/reg/014.png" alt="">
+			<span>上海工商</span>
+			<img src="__STATIC__/ui/reg/015.png" alt="">
+			<span>沪公网安备31011002000177号</span>
+		</div>	
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			// 登录未登录
+			var userid = "{$Think.session.userid}"
+			if(userid == '') {
+				$('.notuser').show()
+				$('.user').hide()
+			} else {
+				$('.notuser').hide()
+				$('.user').show().css('margin-left', '60%')
+			}
+
+			// 退出登录
+			$('#exit').on('click', function() {
+				$.ajax({
+					type: "post",
+					url: "index/index/exit",
+					success: function(data) {
+						$('.notuser').show()
+						$('.user').hide()
+					}
+				})
+			})
+
+			// 跳转到用户
+			$('#cart').on('click', function() {
+				var username = "{$Think.session.username}"
+				window.location.href = '{:url("index/User/index")}'
+			})
+		})
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.small').on('mouseover', 'img', function() {
+				$('#bigimg').attr('src', $(this).attr('src'))
+			})
+
+			$('#colors').on('click', 'div', function() {
+				$(this).parent().children().css('border-color', '#000')
+				$(this).css('border-color', '#ce3d3a')
+
+				// 根据商品名称、颜色查询有哪些尺寸
+				var productname = '{$detail.productname}'
+				var colorname = $(this).prop('title')
+				
+				$.ajax({
+					type: "get",
+					url: "getsizes",
+					data: "productname=" + productname + "&colorname=" + colorname,
+					success: function(data) {
+						$('#sizes').html('')
+						for(var i in data) {
+							$('#sizes').append('<div class="sizes">'+data[i]['sizename']+'</div>')
+						}					
+					}
+				})
+			})
+
+			$('#sizes').on('click', 'div', function() {
+				$(this).parent().children().css('border-color', '#000')
+				$(this).parent().children().css('color', '#000')
+				$(this).css('border-color', '#ce3d3a')
+				$(this).css('color', '#ce3d3a')
+
+				// 根据商品名称、颜色、尺寸查询价格
+				var productname = '{$detail.productname}'
+				var sizename = $(this).text()
+				var colorname;
+				$(".color").each(function(){
+					if($(this).css('border-color') == "rgb(206, 61, 58)"){
+						colorname = $(this).prop('title')
+					}
+				})
+				$.ajax({
+					type: 'get',
+					url: "getproductprice",
+					data: "productname=" + productname + "&colorname=" + colorname + "&sizename=" + sizename,
+					success: function(data) {
+						$('#price').text(data['productprice'])
+						$('.productname').attr('data-id', data['productid'])
+					}
+				})
+			})
+
+			$('#subnum').on('click', function() {
+				var num = $('#num').val()
+				if(num <= 1) {
+					$('#num').val('1')
+				} else {
+					num--
+					$('#num').val(num)
+				}
+			})
+
+			$('#addnum').on('click', function() {
+				var num = $('#num').val()
+				num++
+				$('#num').val(num)
+			})
+
+			// 加入购物车
+			$('#addcart').on('click', function() {
+				var productid = $('.productname').attr('data-id')
+				var productnum = $('input[name="num"]').val()
+				var colorname, sizename;
+				$(".color").each(function(){
+					if($(this).css('border-color') == "rgb(206, 61, 58)") {
+						colorname = $(this).prop('title')
+					}
+				})
+				$(".sizes").each(function() {
+					if($(this).css('border-color') == "rgb(206, 61, 58)") {
+						sizename = $(this).text()
+					}
+				})
+				if(typeof(colorname) == 'undefined' || typeof(sizename) == 'undefined') {
+					alert("请选择颜色、尺寸")
+				} else {
+					$.ajax({
+						type: "post",
+						url: "addcart",
+						data: "productid=" + productid + "&productnum=" + productnum,
+						success: function(data) {
+							if(data == 1) {
+								window.location.href = '{:url("index/User/cart")}'
+							}
+						}
+					})
+				}
+			})
+		})
+	</script>
+
+</body>
+</html>

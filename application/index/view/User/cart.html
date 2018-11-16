@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__STATIC__/mycss/updown.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+		}
+
+		#cart {
+			color: red;
+		}
+
+		.content {
+			width: 100%;
+			height: 450px;
+			margin-top: 40px;
+			margin-bottom: 70px;
+			min-width: 1200px;
+		}
+
+		.left {
+			width: 15%;
+			height: 100%;
+			float: left;
+			margin-left: 10%;
+			background-color: #f4f5f5;
+		}
+
+		.left div {
+			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: center;
+			cursor: pointer;
+			font-size: 18px;
+		}
+
+		.left div a {
+			text-decoration: none;
+			color: #333;
+		}
+
+		.left div a:hover {
+			color: #138b8b;
+		}
+
+		.right {
+			width: 62%;
+			height: 100%;
+			float: left;
+			min-width: 745px;
+			margin-left: 3%;
+			overflow: auto;
+		}
+
+		.left div:nth-child(2) a {
+			color: #138b8b;
+		}
+
+		.mytable {
+			width: 100%;
+		}
+
+		.mytable tr {
+			text-align: center;
+		}
+
+		.mytable tr td {
+			font-size: 14px;
+			color: #333;
+			border-bottom: 1px solid #999;
+		}
+
+		.img img {
+			width: 100px;
+			height: 60px;
+		}
+
+		.number > div > div {
+			float: left;
+		}
+
+		.number > div {
+			display: inline-block;
+		}
+
+		.sub, .add {
+			width: 32px;
+			height: 24px;
+			line-height: 24px;
+			background-color: #f4f5f5;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+
+		.num {
+			width: 36px;
+			height: 24px;
+			line-height: 24px;
+			color: red;
+		}
+
+		.remove {
+			cursor: pointer;
+			color: red;
+		}
+
+		.right-bottom {
+			margin-top: 30px;
+			font-size: 14px;
+			color: #333;
+		}
+
+		.selnum {
+			float: left;
+		}
+
+		#removesel {
+			float: left;
+			margin-left: 30px;
+			cursor: pointer;
+		}
+
+		.money {
+			float: right;
+			margin-right: 40px;
+		}
+
+		#downorder {
+			width: 80px;
+			height: 38px;
+			line-height: 38px;
+			text-align: center;
+			background-color: #138b8b;
+			border-radius: 4px;
+			font-size: 18px;
+			color: #fff;
+			float: right;
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<!-- 顶部 -->
+	<div class="top">
+		<div class="notuser">
+			<a href="{:url('index/login/login')}">登录</a> /
+			<a href="{:url('index/login/index')}">注册</a>
+		</div>
+		<div class="user">
+			用户名: 
+			<span id="username" class="username">{$Think.session.username}</span>
+			<span id="exit" class="exit">退出登录</span>
+		</div>
+		<div id="cart">用户信息</div>
+		<div>收藏</div>
+		<div>帮助中心</div>
+	</div>
+
+	<!-- 导航栏 -->
+	<div class="nav">
+		<div class="logo">
+			<img src="__STATIC__/ui/reg/013.png" alt="">
+		</div>
+		<div class="navs"><a href="{:url('index/index/index')}">首页</a></div>
+		<div class="navs"><a href="{:url('index/type/index')}">男鞋</a></div>
+		<div class="navs"><a href="{:url('index/type/female')}">女鞋</a></div>
+		<div class="navs"><a href="{:url('index/personal/index')}">私人订制</a></div>
+		<div class="navs"><a href="">WanXieAPP</a></div>
+		<div class="search">
+			<input type="text">
+			<div class="searchbtn">搜索</div>
+		</div>
+	</div>
+
+	<!-- 主体 -->
+	<div class="content">
+		<div class="left">
+			<div><a href="{:url('index/User/index')}">个人信息</a></div>
+			<div><a href="{:url('index/User/cart')}">购物车</a></div>
+			<div><a href="{:url('index/User/order')}">我的订单</a></div>
+			<div><a href="{:url('index/User/address')}">收货地址</a></div>
+			<div><a href="">我的卡卷</a></div>
+			<div><a href="">在线客服</a></div>
+		</div>
+		<div class="right">
+			<table class="mytable" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<input type="checkbox" name="checkall"> 全选
+					</td>
+					<td>图片</td>
+					<td>名称</td>
+					<td>颜色</td>
+					<td>尺寸</td>
+					<td>单价</td>
+					<td>数量</td>
+					<td>小计</td>
+					<td>操作</td>
+				</tr>
+				{volist id="cartdata" name="cartdata"}
+					<tr data-id="{$cartdata.cartid}" data-proid="{$cartdata.productid}">
+						<td>
+							<input type="checkbox" name="check">
+						</td>
+						<td class="img">
+							<img src="__STATIC__{$cartdata.imgurl}" alt="">
+						</td>
+						<td>{$cartdata.productname}</td>
+						<td>{$cartdata.colorname}</td>
+						<td>{$cartdata.sizename}</td>
+						<td><span style="color: red;">{$cartdata.productprice}</span>元</td>
+						<td class="number" style="text-align: center;">
+							<div>
+								<div class="sub">-</div>
+								<div class="num">{$cartdata.productnum}</div>
+								<div class="add">+</div>
+							</div>
+						</td>
+						<td><span class="smprice" style="color: red;">{$cartdata.productprice*$cartdata.productnum}</span>元</td>
+						<td>
+							<div class="remove">删除</div>
+						</td>
+					</tr>
+				{/volist}
+			</table>
+
+			<div class="right-bottom">
+				<div class="selnum">已选（<span id="selnum">0</span>）条   共（<span id="pronum">0</span>）件商品</div>
+				<div id="removesel">删除选中</div>
+				<div id="downorder">下单</div>
+				<div class="money">总计: <span id="money" style="color: red; font-size: 24px;">0</span>元</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="bottom-up">
+			<div class="lists">
+				<div>电子礼品卡</div>
+				<div>附近商店</div>
+				<div>订阅电子邮件</div>
+				<div>注册NIKE会员</div>
+				<div>网站反馈</div>
+			</div>
+			<div class="lists">
+				<div>获得帮助</div>
+				<div>订单状态</div>
+				<div>配送方式</div>
+				<div>退换货</div>
+				<div>付款选项</div>
+				<div>联系我们</div>
+			</div>
+			<div class="lists">
+				<div>关于</div>
+				<div>新闻</div>
+				<div>投资者</div>
+				<div>招贤纳士</div>
+				<div>新品预览</div>
+			</div>
+			<div class="app">
+				<div class="app-bt">下载WanXie官方APP</div>
+				<div class="app-st">进一步了解我们</div>
+				<img src="__STATIC__/ui/reg/011.png" alt="">
+			</div>
+			<div class="wx">
+				<img src="__STATIC__/ui/reg/018.png" alt="">
+				<img src="__STATIC__/ui/reg/016.png" alt="">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="foot">
+			<img src="__STATIC__/ui/reg/0111.png" alt="">
+			<span>中国大陆</span>
+			<span>2017 WX,lnc,保留所有权利</span>
+			<span>分类浏览</span>
+			<span>使用条款</span>
+			<span>隐私政策</span>
+			<span>沪ICP备14009339号</span>
+			<img src="__STATIC__/ui/reg/014.png" alt="">
+			<span>上海工商</span>
+			<img src="__STATIC__/ui/reg/015.png" alt="">
+			<span>沪公网安备31011002000177号</span>
+		</div>	
+	</div>
+
+
+<script>
+	$(document).ready(function() {
+		// 登录未登录
+		var userid = "{$Think.session.userid}"
+			if(userid == '') {
+				$('.notuser').show()
+				$('.user').hide()
+			} else {
+				$('.notuser').hide()
+				$('.user').show().css('margin-left', '60%')
+			}
+
+		// 退出登录
+		$('#exit').on('click', function() {
+			$.ajax({
+				type: "post",
+				url: "index/index/exit",
+				success: function(data) {
+					$('.notuser').show()
+					$('.user').hide()
+				}
+			})
+		})
+
+		// 跳转到用户
+		$('#cart').on('click', function() {
+			var username = "{$Think.session.username}"
+			window.location.href = '{:url("index/User/index")}'
+		})
+
+		// 修改购物车记录数量的方法
+		function updatacart(cartid, productnum) {
+			$.ajax({
+				type: "post",
+				url: "updatacart",
+				data: "cartid=" + cartid + "&productnum=" + productnum
+			})
+		}
+
+		// 总计方法
+		function getmoney() {
+			var money = 0
+			$('input[name="check"]:checked').each(function(index, ele) {
+				money += parseInt($(this).parent().parent().children().eq(7).children().text())
+			})
+			$('#money').text(money)
+		}
+
+		// 商品总数方法
+		function getpronum() {
+			var pronum = 0
+			$('input[name="check"]:checked').each(function(index, ele) {
+				pronum += parseInt($(this).parent().parent().children().eq(6).children().children().eq(1).text())
+			})
+			$('#pronum').text(pronum)
+		}
+
+		// 减少数量
+		$('.mytable').on('click', '.sub', function() {
+			var num = $(this).parent().children().eq(1).text()
+			var price = $(this).parent().parent().parent().children().eq(5).children().text()
+			if(num == '1') {
+				$(this).parent().children().eq(1).text('1')
+				$(this).parent().parent().parent().children().eq(7).children().text(price*num)
+			} else {
+				$(this).parent().children().eq(1).text(--num)
+				$(this).parent().parent().parent().children().eq(7).children().text(price*num)
+			}
+
+			var cartid = $(this).parent().parent().parent().attr('data-id')
+			var num = $(this).parent().children().eq(1).text()
+			updatacart(cartid, num)
+
+			getmoney()
+			getpronum()
+		})
+
+		// 数量增加
+		$('.mytable').on('click', '.add', function() {
+			var num = $(this).parent().children().eq(1).text()
+			var price = $(this).parent().parent().parent().children().eq(5).children().text()
+			$(this).parent().children().eq(1).text(++num)
+			$(this).parent().parent().parent().children().eq(7).children().text(price*num)
+
+			var cartid = $(this).parent().parent().parent().attr('data-id')
+			var num = $(this).parent().children().eq(1).text()
+			updatacart(cartid, num)
+
+			getmoney()
+			getpronum()
+		})
+
+		// 删除购物车记录
+		$('.mytable').on('click', '.remove', function() {
+			var cartid = $(this).parent().parent().attr('data-id')
+			var r = confirm('确认删除？')
+
+			if(r == true) {
+				$.ajax({
+					type: "POST",
+					url: "removecart",
+					data: "cartid=" + cartid,
+					success: function(data) {
+						if(data == 1) {
+							location.reload()
+						}
+					}
+				})
+			}
+		})
+
+		// 批量删除记录
+		$('#removesel').on('click', function() {
+			var cartidarr = []
+			$('input[name="check"]').each(function(index, ele) {
+				if($(this).prop('checked') == true) {
+					cartidarr[index] = $(this).parent().parent().attr('data-id')
+				}
+			})
+			// 去除数组空值
+			for(var i = 0; i < cartidarr.length; i++) {
+	            if(cartidarr[i] == "" || typeof(cartidarr[i]) == "undefined") {
+	                cartidarr.splice(i, 1)
+	                i = i-1
+	            }
+			}
+
+			if(cartidarr.length == 0) {
+				alert('请选择要删除的项')
+			} else {
+				var r = confirm('确认删除？')
+
+				if(r == true) {
+					$.ajax({
+						type: "post",
+						url: "removecarts",
+						data: {cartidarr:cartidarr},
+						success: function(data) {
+							if(typeof(data) == 'number') {
+								location.reload()
+							}
+						}
+					})
+				}
+			}
+		})
+
+		// 全选
+		$('input[name="checkall"]').on('click', function() {
+			var temp = $(this).prop('checked')
+			if(temp) {
+				$('input[name="check"]').prop('checked', true)
+			} else {
+				$('input[name="check"]').prop('checked', false)
+			}
+
+			var checknum = $('input[name="check"]:checked').length
+			
+			$('#selnum').text(checknum)
+			getmoney()
+			getpronum()
+		})
+
+		// 单选
+		$('input[name="check"]').on('click', function() {
+			var checknum = $('input[name="check"]:checked').length
+			var smprice = $(this).parent().parent().children().eq(7).children().text()
+
+			$('#selnum').text(checknum)
+			getmoney()
+			getpronum()
+		})
+
+		// 下单
+		$('#downorder').on('click', function() {
+			var productids = []
+			var buycounts = []
+			var temp = 0
+			$('input[name="check"]:checked').each(function(index, ele) {
+				var row = []
+				productids[productids.length] = $(this).parent().parent().attr('data-proid')
+				buycounts[buycounts.length] = $(this).parent().parent().children().eq(6).children().children().eq(1).text()
+				temp++
+			})
+
+			if(temp == 0) {
+				alert("没有选择商品")
+				return
+			}
+
+			var allproductnum = $('#pronum').text()
+			var ordermoney = $('#money').text()
+
+			productids = productids.toString()
+			buycounts = buycounts.toString()
+
+			$.ajax({
+				type: "post",
+				url: "addorder",
+				data: "allproductnum=" + allproductnum + "&ordermoney=" + ordermoney + "&productids=" + productids + "&buycounts=" + buycounts,
+				success: function(data) {
+					if(temp == data) {
+						$('input[name="check"]:checked').each(function(index, ele) {
+							$(this).parent().parent().remove()
+							$('#selnum').text('0')
+							$('#money').text('0')
+							$('#pronum').text('0')
+
+							location.href = 'order'
+						})
+					}
+				}
+			})
+		})
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+			overflow-y: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">分组名称:</label>
+	    <div class="layui-input-block">
+	      	<input id="groupname" type="text" name="groupname" required lay-verify="required" value="{$groupdata.groupname}" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+	<form class="layui-form" action="">
+		<div class="layui-form-item">
+    		<label class="layui-form-label">权限选择:</label>
+    		<div class="layui-input-block">
+    			{volist id="permissions" name="permissions"}
+					<input type="checkbox" name="permission" data-id="{$permissions.pid}" title="{$permissions.pname}">
+    			{/volist}
+    		</div>
+  		</div>
+  	</form>
+  	<div class="layui-form-item">
+    	<div class="layui-input-block">
+      		<button id="addgroup" class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+      		<button id="reset" class="layui-btn layui-btn-primary">重置</button>
+    	</div>
+  	</div>
+ 
+<script src="__ROOT__/static/layui/layui.js"></script>
+
+<script>
+	layui.use('form', function(){
+	    var form = layui.form;
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		// 重置
+		$('#reset').on('click', function() {
+			
+		})
+
+		// 标出已有权限
+		var pids = "{$groupdata.pids}"
+		pids = pids.split(',')
+
+		$('input[name="permission"]').each(function(index, ele) {
+			for(var i = 0; i < pids.length; i++) {
+				if($(this).attr("data-id") == pids[i]) {
+					$(this).prop('checked', true)
+				}
+			}
+		})
+
+		// 修改分组
+		$('#addgroup').on('click', function() {
+			var groupid = "{$groupdata.groupid}"
+			var groupname = $('#groupname').val()
+			var pids = []
+
+			$('input[name="permission"]:checked').each(function(index, ele) {
+				pids[index] = $(this).attr('data-id')
+			})
+
+			// 获取原分组名
+			var frontname = "{$groupdata.groupname}"
+
+			if(groupname == '') {
+				alert("分组名称不能为空")
+			} else {
+				$.ajax({
+					type: "post",
+					url: "toupdatagroup",
+					data: "groupid=" + groupid + "&frontname=" + frontname + "&groupname=" + groupname + "&pids=" + pids,
+					success: function(data) {
+						if(data == 22) {
+							alert("分组名称已存在")
+						} else if(data == 1) {
+							location.href = 'group'
+						}
+					}
+				})
+			}
+		})
+	})
+</script>
+
+</body>
+</html>

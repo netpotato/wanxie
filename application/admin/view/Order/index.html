@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	html {
+		width: 100%;
+		height: 100%;
+	}
+	body {
+		width: 100%;
+		height: 100%;
+		overflow-y: hidden;
+	}
+	#mytable {
+		min-width: 1110px;
+		table-layout:fixed;
+	}
+</style>
+<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<table id="mytable" class="layui-table" lay-even="" lay-skin="row" style="margin-top: 5px">
+		<colgroup>
+			<col width="60">
+		    <col width="130">
+		    <col width="130">
+		    <col width="70">
+		    <col width="70">
+		    <col width="70">
+		    <col width="70">
+		    <col width="70">
+		    <col width="70">
+		    <col width="70">
+		    <col width="60">
+		</colgroup>
+		<thead>
+		    <tr>
+		    	<th>
+		    		<input id="allcheck" type="checkbox" name="allcheck"> 全选
+		    	</th>
+			    <th>订单编号</th>
+			    <th>订单日期</th>
+			    <th>订单金额</th>
+			    <th>用户编号</th>
+			    <th>是否支付</th>
+			    <th>支付方式</th>
+			    <th>订单状态</th>
+			    <th>商品数量</th>
+			    <th>地址编号</th>
+			    <th>操作</th>
+		    </tr> 
+		</thead>
+		<tbody>
+		    {volist id='orders' name='orders'}
+				<tr>
+					<td>
+						<input class="check" type="checkbox" name="check">
+					</td>
+					<td>{$orders.orderid}</td>
+					<td>{$orders.orderdate}</td>
+					<td>{$orders.ordermoney}</td>
+					<td>{$orders.userid}</td>
+					<td>
+						{switch $orders.ispay}
+							{case 0}<span style="color: gray">未付款</span>{/case}
+							{case 1}<span style="color: green">已付款</span>{/case}
+						{/switch}
+					</td>
+					<td>
+						{switch $orders.payway}
+							{case 0}微信{/case}
+							{case 1}支付宝{/case}
+						{/switch}
+					</td>
+					<td>
+						{switch $orders.orderstate}
+							{case 0}<span style="color: gray">未处理</span>{/case}
+							{case 1}<span style="color: green">未处理</span>{/case}
+						{/switch}
+						<div class="orderstate" data-state="{$orders.orderstate}" style="display: none;"></div>
+					</td>
+					<td>{$orders.allproductnum}</td>
+					<td>{$orders.addressid}</td>
+					<td>
+						{switch $orders.orderstate}
+							{case 0}
+								<button id="dispose" class="layui-btn layui-btn-xs layui-btn-normal">处理</button>
+							{/case}
+							{case 1}
+								<button id="dispose" class="layui-btn layui-btn-xs layui-btn-normal layui-bg-red">取消</button>
+							{/case}
+						{/switch}
+					</td>
+				</tr>
+		    {/volist}
+		</tbody>
+	</table>
+
+	<script>
+		$(document).ready(function() {
+
+			// 处理
+			$('#mytable').on('click', '#dispose', function() {
+				var orderid = $(this).parent().parent().children().eq(1).text()
+				var orderstate = $(this).parent().parent().children().eq(7).children('div').attr('data-state')
+				
+				$.ajax({
+					type: "post",
+					url: "dispose",
+					data: "orderid=" + orderid + "&orderstate=" + orderstate,
+					success: function(data) {
+						if(data == 99) {
+							alert("您没有权限")
+						} else if(data == 1) {
+							location.reload()
+						}
+					}
+				})
+			})
+
+			
+		})
+	</script>
+</body>
+</html>

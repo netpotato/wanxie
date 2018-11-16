@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+			overflow-y: hidden;
+		}
+		#mytable {
+			table-layout:fixed;
+		}
+	</style>
+</head>
+<body>
+	<table class="layui-table" lay-even="" lay-skin="row">
+		<colgroup>
+		    <col width="100">
+		    <col width="100">
+		    <col width="100">
+		    <col width="100">
+		    <col>
+		</colgroup>
+		<thead>
+		    <tr>
+			    <th>用户编号</th>
+			    <th>用户名称</th>
+			    <th>备注</th>
+		    </tr> 
+		</thead>
+		<tbody>
+		    {volist id='users' name='users'}
+				<tr>
+					<td>{$users.userid}</td>
+					<td>{$users.username}</td>
+					<td>{$users.usernote}</td>
+				</tr>
+		    {/volist}
+		</tbody>
+	</table>  
+</body>
+</html>

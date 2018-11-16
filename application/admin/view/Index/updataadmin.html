@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+			overflow-y: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">管理员编号:</label>
+	    <div class="layui-input-block">
+	      	<label id="adminid" class="layui-form-label">{$admindata.adminid}</label>
+	    </div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">管理员名称:</label>
+	    <div class="layui-input-block">
+	      	<input id="adminname" type="text" name="adminname" required lay-verify="required" placeholder="" value="{$admindata.adminname}" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+  	<div class="layui-form-item layui-form-text">
+    	<label class="layui-form-label">管理员说明:</label>
+    	<div class="layui-input-block">
+      		<textarea id="adminnote" name="adminnote" placeholder="" class="layui-textarea">{$admindata.adminnote}</textarea>
+    	</div>
+  	</div>
+  	<div class="layui-form-item">
+    	<div class="layui-input-block">
+      		<button id="updataadmin" class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+    	</div>
+  	</div>
+ 
+<script src="__ROOT__/static/layui/layui.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('#updataadmin').on('click', function() {
+			var adminid = $('#adminid').text()
+			var frontadminname = "{$admindata.adminname}"
+			var adminname = $('input[name="adminname"]').val()
+			var adminnote = $('#adminnote').val()
+
+			$.ajax({
+				type: "post",
+				url: "toupdataadmin",
+				data: "adminid=" + adminid + "&frontadminname=" + frontadminname + "&adminname=" + adminname + "&adminnote=" + adminnote,
+				success: function(data) {
+					if(data == 22) {
+						alert("该名称已存在")
+					} else if (data == 1) {
+						top.location.replace('index')
+					}
+				}
+			})
+		})
+	})
+</script>
+
+</body>
+</html>

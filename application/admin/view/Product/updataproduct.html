@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">商品编号:</label>
+	    <div class="layui-input-block">
+	      	<span style="display: block;padding-top: 10px;">
+	      		{$productid}
+	      	</span>
+	    </div>
+	</div>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">商品名称:</label>
+	    <div class="layui-input-block">
+	      	<input id="productname" type="text" name="productname" required lay-verify="required" value="{$products.productname}" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+	<form class="layui-form" action="">
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">类型:</label>
+	    	<div class="layui-input-block">
+		      	<select id="typeid" name="type" lay-verify="required">
+			        <option value=""></option>
+			        {volist id='types' name='types'}
+				        {eq name="$types.typename" value="$products.typename"}
+				        	<option value="{$types.typeid}" selected>{$types.typename}</option>
+				        {else/}
+				        	<option value="{$types.typeid}">{$types.typename}</option>
+				        {/eq}
+			        {/volist}
+		      	</select>
+	    	</div>
+	  	</div>
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">品牌:</label>
+	    	<div class="layui-input-block">
+		      	<select id="brandid" name="brand" lay-verify="required">
+			        <option value=""></option>
+			        {volist id='brands' name='brands'}
+			        	{eq name="$brands.brandname" value="$products.brandname"}
+				        	<option value="{$brands.brandid}" selected>{$brands.brandname}</option>
+				        {else/}
+				        	<option value="{$brands.brandid}">{$brands.brandname}</option>
+				        {/eq}
+			        {/volist}
+		      	</select>
+	    	</div>
+	  	</div>
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">颜色:</label>
+	    	<div class="layui-input-block">
+		      	<select id="colorid" name="color" lay-verify="required">
+			        <option value=""></option>
+			        {volist id='colors' name='colors'}
+			        	{eq name="$colors.colorname" value="$products.colorname"}
+				        	<option value="{$colors.colorid}" selected>{$colors.colorname}</option>
+				        {else/}
+				        	<option value="{$colors.colorid}">{$colors.colorname}</option>
+				        {/eq}
+			        {/volist}
+		      	</select>
+	    	</div>
+	  	</div>
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">尺寸:</label>
+	    	<div class="layui-input-block">
+		      	<select id="sizeid" name="size" lay-verify="required">
+			        <option value=""></option>
+			        {volist id='sizes' name='sizes'}
+			        	{eq name="$sizes.sizename" value="$products.sizename"}
+				        	<option value="{$sizes.sizeid}" selected>{$sizes.sizename}</option>
+				        {else/}
+				        	<option value="{$sizes.sizeid}">{$sizes.sizename}</option>
+				        {/eq}
+			        {/volist}
+		      	</select>
+	    	</div>
+	  	</div>
+	  	<div class="layui-form-item">
+	    	<label class="layui-form-label">男女:</label>
+	    	<div class="layui-input-block">
+		      	<select id="sex" name="sex" lay-verify="required">
+			        <option value=""></option>
+			        {eq name="$products.sex" value="1"}
+			        	<option value="1" selected>男</option>
+			        	{else/}
+			        	<option value="1">男</option>
+			        {/eq}
+			        {eq name="$products.sex" value="0"}
+			        	<option value="0" selected>女</option>
+			        	{else/}
+			        	<option value="0">女</option>
+			        {/eq}
+			        {eq name="$products.sex" value="2"}
+			        	<option value="2" selected>男女</option>
+			        	{else/}
+			        	<option value="2">男女</option>
+			        {/eq}
+		      	</select>
+	    	</div>
+	  	</div>
+  	</form>
+  	<div class="layui-form-item">
+	    <label class="layui-form-label">商品价格:</label>
+	    <div class="layui-input-block">
+	      	<input id="productprice" type="number" min="0" name="productprice" required lay-verify="required" value="{$products.productprice}" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">商品图片:</label>
+	    <input id="productimg" type="file" style="margin-top: 7px">
+	    <img id="imgurl" src="__STATIC__{$products.imgurl}" width="120" height="80" alt="">
+	</div>
+  	<div class="layui-form-item layui-form-text">
+    	<label class="layui-form-label">商品详情:</label>
+    	<div class="layui-input-block">
+      		<textarea id="productdetail" name="productdetail" placeholder="" class="layui-textarea">{$products.productdetail}</textarea>
+    	</div>
+  	</div>
+  	<div class="layui-form-item">
+	    <label class="layui-form-label">商品数量:</label>
+	    <div class="layui-input-block">
+	      	<input id="productcount" type="number" min="0" name="productcount" required lay-verify="required" value="{$products.productcount}" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+  	<div class="layui-form-item">
+    	<label class="layui-form-label">是否显示:</label>
+    	<div class="layui-input-block">
+    		{eq name="$products.isshow" value="1"}
+    			 <input type="radio" name="isshow" value="1" title="显示" checked>显示
+    			{else/}
+    			<input type="radio" name="isshow" value="1" title="显示">显示
+    		{/eq}
+    		{eq name="$products.isshow" value="0"}
+    			 <input type="radio" name="isshow" value="0" title="不显示" checked="">不显示
+    			{else/}
+    			<input type="radio" name="isshow" value="0" title="不显示">不显示
+    		{/eq}
+    	</div>
+  	</div>
+  	<div class="layui-form-item">
+	    <label class="layui-form-label">排序:</label>
+	    <div class="layui-input-block">
+	      	<input id="productsort" type="number" min="0" name="productsort" required lay-verify="required" value="{$products.productsort}" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+  	<div class="layui-form-item">
+    	<div class="layui-input-block">
+      		<button id="updataproduct" class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+      		<button id="reset" class="layui-btn layui-btn-primary">重置</button>
+    	</div>
+  	</div>
+ 
+<script src="__STATIC__/layui/layui.js"></script>
+
+<script>
+	layui.use('form', function(){
+	    var form = layui.form;
+	});
+</script>
+
+<script>
+	$('#productimg').on('change', function() {
+		var reader = new FileReader()
+		var file = this.files[0]
+		reader.readAsDataURL(file)
+
+		reader.onload = function () {
+			$('#imgurl').attr('src', reader.result)
+		}
+	})
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		$('#updataproduct').on('click', function() {
+			var formData = new FormData()
+
+			formData.append('productid', {$productid})
+			formData.append('productname', $('#productname').val())
+			formData.append('typeid', $('#typeid').val())
+			formData.append('brandid', $('#brandid').val())
+			formData.append('colorid', $('#colorid').val())
+			formData.append('sizeid', $('#sizeid').val())
+			formData.append('sex', $('#sex').val())
+			formData.append('productprice', $('#productprice').val())
+			formData.append('productdetail', $('#productdetail').val())
+			formData.append('productcount', $('#productcount').val())
+			formData.append('isshow', $('input[name="isshow"]:checked').val())
+			formData.append('productsort', $('#productsort').val())
+			formData.append('file', $('#productimg')[0].files[0])
+
+			$.ajax({
+				type: "post",
+				url: "toupdataproduct",
+				data: formData,
+				dataType: "json",
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					if(data == 22) {
+						alert('改名称已存在')
+					} else if(data == 33) {
+						alert('请选择图片上传')
+					} else {
+						window.location.href = 'index'
+					}
+				}
+			})
+
+		})
+	})	
+</script>
+
+</body>
+</html>

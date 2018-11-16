@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+			overflow-y: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">管理员编号:</label>
+	    <div class="layui-input-block">
+	      	<label id="adminid" class="layui-form-label">{$admindata.adminid}</label>
+	    </div>
+	</div>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">管理员名称:</label>
+	    <div class="layui-input-block">
+	      	<label id="adminname" class="layui-form-label">{$admindata.adminname}</label>
+	    </div>
+	</div>
+	<form class="layui-form" action="">
+		<div class="layui-form-item">
+	    	<label class="layui-form-label">管理员分组:</label>
+	    	<div class="layui-input-block">
+		      	<select id="groupid" name="group" lay-verify="required">
+			        <option value=""></option>
+			        {volist id="groups" name="groups"}
+			        	{eq name="$groups.groupid" value="$admindata.groupid"}
+							<option value="{$groups.groupid}" selected>{$groups.groupname}</option>
+			        	}
+			        	{else/}
+			        		<option value="{$groups.groupid}">{$groups.groupname}</option>
+			        	{/eq}
+			        {/volist}
+		      	</select>
+	    	</div>
+	  	</div>
+  	</form>
+  	<div class="layui-form-item">
+    	<div class="layui-input-block">
+      		<button id="updataadmingroup" class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+      		<button id="reset" class="layui-btn layui-btn-primary">重置</button>
+    	</div>
+  	</div>
+ 
+<script src="__ROOT__/static/layui/layui.js"></script>
+
+<script>
+	layui.use('form', function(){
+	    var form = layui.form;
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		$('#reset').on('click', function() {
+			$('#colorname').val('')
+			$('#colornote').val('')
+		})
+
+		// 修改管理员分组
+		$('#updataadmingroup').on('click', function() {
+			adminid = $('#adminid').text()
+			groupid = $('select[name="group"]').val()
+
+			$.ajax({
+				type: "post",
+				url: "updataadmingroup",
+				data: "adminid=" + adminid + "&groupid=" + groupid,
+				success: function(data) {
+					if(data == 1) {
+						location.href = "admin"
+					} else if(data == 0) {  // 未修改
+						location.href = "admin"
+					}
+				}
+			})
+		})
+	})
+</script>
+
+</body>
+</html>

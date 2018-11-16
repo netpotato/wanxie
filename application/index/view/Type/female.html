@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>女鞋</title>
+	<link rel="stylesheet" href="__STATIC__/mycss/updown.css">
+	<style>
+		.content {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+		}
+
+		.left {
+			width: 17%;
+			margin-left: 5%;
+			min-width: 190px;
+		}
+
+		.mw {
+			width: 100%;
+		}
+
+		.mw-title {
+			height: 40px;
+			font-size: 18px;
+			color: #333;
+			border-bottom: 2px solid #d9dbdb;
+		}
+
+		.brands {
+			cursor: pointer;
+		}
+
+		.mw div:not(:first-child) {
+			font-size: 14px;
+			color: #888;
+			margin-top: 16px;
+		}
+
+		.select {
+			width: 100%;
+			margin-top: 26px;
+		}
+
+		.select-title {
+			height: 40px;
+			font-size: 18px;
+			color: #333;
+			border-bottom: 2px solid #d9dbdb;
+		}
+
+		.price {
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.title {
+			font-size: 16px;
+			color: #333;
+		}
+
+		.price input {
+			width: 84px;
+			height: 34px;
+			border-radius: 2px;
+			border: solid 1px #d9dbdb;
+			text-indent: 10px;
+		}
+
+		.price input:nth-child(2) {
+			margin-top: 16px;
+		}
+
+		.types {
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.type {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			margin-top: 12px;
+			cursor: pointer;
+		}
+
+		.box {
+			width: 18px;
+			height: 18px;
+			border-radius: 2px;
+			border: solid 1px #909090;
+		}
+
+		.name {
+			font-size: 14px;
+			color: #888;
+			margin-left: 7px;
+		}
+
+		.colors {
+			width: 100%;
+			margin-top: 20px;
+			display: flex;
+			flex-direction: column;
+			min-width: 215px;
+			max-width: 230px;
+		}
+
+		.crow-one {
+			width: 70%;
+		}
+
+		.crow-one div {
+			float: left;
+			margin-top: 18px;
+		}
+
+		.colors > div > div {
+			width: 22px;
+			height: 22px;
+			border-radius: 11px;
+			border: 1px solid #000;
+			margin-left: 6px;
+			cursor: pointer;
+		}
+
+		.sizes {
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.sizes .title {
+			margin-bottom: 20px;
+		}
+
+		.sizes > div > div {
+			width: 38px;
+			height: 28px;
+			line-height: 28px;
+			text-align: center;
+			border: 1px solid #ccc;
+			cursor: pointer;
+			float: left;
+		}
+
+		.right {
+			width: 80%;
+			float: left;
+			margin-left: 10%;
+		}
+
+		.right-top {
+			width: 100%;
+		}
+
+		.right-title {
+			font-size: 18px;
+			color: #333;
+			float: left;
+		}
+
+		.sort {
+			float: right;
+			margin-right: 23%;
+		}
+
+		.right-content {
+			width: 77%;
+			margin-top: 50px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.shoes {
+			width: 100%;
+		}
+
+		.shoe {
+			width: 19%;
+			height: 240px;
+			float: left;
+			margin-top: 35px;
+			cursor: pointer;
+		}
+
+		.shoe .img {
+			width: 100%;
+		}
+
+		.img img {
+			width: 100%;
+		}
+
+		.shoe:not(:first-child) {
+			margin-left: 1%;
+		}
+
+		.shoe-name {
+			font-size: 14px;
+			color: #333;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+			margin-top: 15px;
+		}
+
+		.shoe-type {
+			font-size: 16px;
+			color: #a19e9e;
+			margin-top: 12px;
+		}
+
+		.shoe-price {
+			font-size: 16px;
+			color: #a19e9e;
+			margin-top: 5px;
+		}
+
+		.shoe-price span {
+			font-size: 16px;
+			color: #333;
+		}
+
+		.navs:nth-child(4) a {
+			color: red;
+		}
+
+	</style>
+	<script type="text/javascript" src="__STATIC__/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	
+	<!-- 顶部 -->
+	<div class="top">
+		<div class="notuser">
+			<a href="{:url('index/login/login')}">登录</a> /
+			<a href="{:url('index/login/index')}">注册</a>
+		</div>
+		<div class="user">
+			用户名: 
+			<span id="username" class="username">{$Think.session.username}</span>
+			<span id="exit" class="exit">退出登录</span>
+		</div>
+		<div id="cart">用户信息</div>
+		<div>收藏</div>
+		<div>帮助中心</div>
+	</div>
+
+	<!-- 导航栏 -->
+	<div class="nav">
+		<div class="logo">
+			<img src="__STATIC__/ui/reg/013.png" alt="">
+		</div>
+		<div class="navs"><a href="{:url('index/index/index')}">首页</a></div>
+		<div class="navs"><a href="{:url('index/type/index')}">男鞋</a></div>
+		<div class="navs"><a href="{:url('index/type/female')}">女鞋</a></div>
+		<div class="navs"><a href="{:url('index/personal/index')}">私人订制</a></div>
+		<div class="navs"><a href="">WanXieAPP</a></div>
+		<div class="search">
+			<input type="text">
+			<div class="searchbtn">搜索</div>
+		</div>
+	</div>
+
+	<!-- content -->
+	<div class="content">
+		<div class="left">
+			<div class="mw">
+				<div class="mw-title">女鞋</div>
+				{volist id="brands" name="brands"}
+					<div class="brands">{$brands.brandname}</div>
+				{/volist}
+			</div>
+			<div class="select">
+				<div class="select-title">筛选</div>
+				<div class="price">
+					<div class="title">价格</div>
+					<input id="smprice" type="number" value="0"> -
+					<input id="bigprice" type="number" value="9999">
+				</div>
+				<div class="types">
+					<div class="title">类型</div>
+					{volist id="types" name="types"}
+						<div class="type">
+							<div class="box"></div>
+							<div class="name">{$types.typename}</div>
+						</div>
+					{/volist}
+				</div>
+				<div class="colors">
+					<div class="title">颜色</div>
+					<div class="crow-one">
+						{volist id="colors" name="colors"}
+							<div class="color" style="background-color: {$colors.colornote}" title="{$colors.colorname}"></div>
+						{/volist}
+					</div>
+				</div>
+				<div class="sizes">
+					<div class="title">尺寸</div>
+					<div>
+						{volist id="sizes" name="sizes"}
+							<div class="size">{$sizes.sizename}</div>
+						{/volist}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="tight-top">
+				<div class="right-title">
+					<span id="selsex">女鞋</span>
+					<span id="selbrand"></span><!-- 品牌 -->
+					<span id="selprice"></span><!-- 价格 -->
+					<span id="seltype"></span><!-- 类型 -->
+					<span id="selcolor"></span><!-- 颜色 -->
+					<span id="selsize"></span><!-- 尺寸 -->
+					(<span id="productnum">{$productsnum}</span>)
+				</div>
+				<div class="sort">
+					<select name="" id="">
+						<option value="">价格</option>
+						<option value="">销量</option>
+					</select>
+				</div>
+			</div>
+			<div class="right-content">
+				<div class="shoes">
+					{volist id="wproducts" name="wproducts"}
+						<div class="shoe">
+							<div data-id="{$wproducts.productid}" style="display: none;"></div>
+							<div class="img">
+								<img src="__STATIC__{$wproducts.imgurl}" alt="">
+							</div>
+							<div class="shoe-name">{$wproducts.productname}</div>
+							<div class="shoe-type">{$wproducts.typename}鞋</div>
+							<div class="shoe-price">￥<span>{$wproducts.productprice}</span></div>
+						</div>
+					{/volist}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 底部 -->
+	<div class="bottom">
+		<div class="bottom-up">
+			<div class="lists">
+				<div>电子礼品卡</div>
+				<div>附近商店</div>
+				<div>订阅电子邮件</div>
+				<div>注册NIKE会员</div>
+				<div>网站反馈</div>
+			</div>
+			<div class="lists">
+				<div>获得帮助</div>
+				<div>订单状态</div>
+				<div>配送方式</div>
+				<div>退换货</div>
+				<div>付款选项</div>
+				<div>联系我们</div>
+			</div>
+			<div class="lists">
+				<div>关于</div>
+				<div>新闻</div>
+				<div>投资者</div>
+				<div>招贤纳士</div>
+				<div>新品预览</div>
+			</div>
+			<div class="app">
+				<div class="app-bt">下载WanXie官方APP</div>
+				<div class="app-st">进一步了解我们</div>
+				<img src="__STATIC__/ui/reg/011.png" alt="">
+			</div>
+			<div class="wx">
+				<img src="__STATIC__/ui/reg/018.png" alt="">
+				<img src="__STATIC__/ui/reg/016.png" alt="">
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="foot">
+			<img src="__STATIC__/ui/reg/0111.png" alt="">
+			<span>中国大陆</span>
+			<span>2017 WX,lnc,保留所有权利</span>
+			<span>分类浏览</span>
+			<span>使用条款</span>
+			<span>隐私政策</span>
+			<span>沪ICP备14009339号</span>
+			<img src="__STATIC__/ui/reg/014.png" alt="">
+			<span>上海工商</span>
+			<img src="__STATIC__/ui/reg/015.png" alt="">
+			<span>沪公网安备31011002000177号</span>
+		</div>	
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			// 登录未登录
+			var userid = "{$Think.session.userid}"
+			if(userid == '') {
+				$('.notuser').show()
+				$('.user').hide()
+			} else {
+				$('.notuser').hide()
+				$('.user').show().css('margin-left', '60%')
+			}
+
+			// 退出登录
+			$('#exit').on('click', function() {
+				$.ajax({
+					type: "post",
+					url: "index/index/exit",
+					success: function(data) {
+						$('.notuser').show()
+						$('.user').hide()
+					}
+				})
+			})
+
+			// 跳转到用户
+			$('#cart').on('click', function() {
+				var username = "{$Think.session.username}"
+				window.location.href = '{:url("index/User/index")}'
+			})
+
+			// 获取商品函数
+			function getproduct() {
+				var sex,brandname,bigprice,smprice,typename,colorname,sizename
+				sex = '0'
+				if($('#selbrand').text() == '') {
+					brandname = ''
+				} else {
+					brandname = $('#selbrand').text().split(' ')[1]
+				}
+				bigprice = $('#bigprice').val()
+				smprice = $('#smprice').val()
+				if($('#seltype').text() == '') {
+					typename = ''
+				} else {
+					typename = $('#seltype').text().split(' ')[1]
+				}
+				if($('#selcolor').text() == '') {
+					colorname = ''
+				} else {
+					colorname = $('#selcolor').text().split(' ')[1].split('色')[0]
+				}
+				if($('#selsize').text() == '') {
+					sizename = ''
+				} else {
+					sizename = $('#selsize').text().split(' ')[1]
+				}
+
+				var data = "sex=" + sex + "&brandname=" + brandname + "&bigprice=" + bigprice + "&smprice=" + smprice + "&typename=" + typename + "&colorname=" + colorname + "&sizename=" + sizename
+
+				$.ajax({
+					type: "get",
+					url: "getproducts",
+					data: data,
+					dataType: "json",
+					success: function(data) {
+						var productnum = 0
+						$('.shoes').html('')
+						for(var i in data) {
+							$('.shoes').append('<div class="shoe"><div data-id="'+data[i]['productid']+'" style="display: none;"></div><div class="img"><img src="__STATIC__'+data[i]['imgurl']+'" alt=""></div><div class="shoe-name">'+data[i]['productname']+'</div><div class="shoe-type">'+data[i]['typename']+'鞋</div><div class="shoe-price">￥<span>'+data[i]['productprice']+'</span></div></div>')
+							productnum++
+						}
+						$('#productnum').text(productnum)
+					}
+				})
+			}
+
+			// 选择品牌
+			$('.brands').on('click', function() {
+				var brand = $(this).text()
+				$('.brands').css('color', '#888')
+				$(this).css('color', '#000')
+				$('#selbrand').text('/ ' + brand)
+				getproduct()
+			})
+			// 选择价格
+			$('#bigprice').on('change', function() {
+				var bigprice = $('#bigprice').val()
+				var smprice = $('#smprice').val()
+				$('#selprice').text('/ ' + smprice + '-' + bigprice + '元')
+				getproduct()
+			})
+			$('#smprice').on('change', function() {
+				var bigprice = $('#bigprice').val()
+				var smprice = $('#smprice').val()
+				$('#selprice').text('/ ' + smprice + '-' + bigprice + '元')
+				getproduct()
+			})
+			
+			// 选择类型
+			$('.name').on('click', function() {
+				var type = $(this).text()
+				$('.box').css('background-color', '#fff')
+				$(this).parent().children().eq(0).css('background-color', '#444')
+				$('#seltype').text('/ ' + type)
+				getproduct()
+			})
+
+			// 选择颜色
+			$('.color').on('click', function() {
+				var color = $(this).attr('title') + '色'
+				$('#selcolor').text('/ ' + color)
+				getproduct()
+			})
+
+			// 选择尺寸
+			$('.size').on('click', function() {
+				var size = $(this).text()
+				$('.size').css('background-color', '#fff')
+				$(this).css('background-color', '#ccc')
+				$('#selsize').text('/ ' + size)
+				getproduct()
+			})
+
+			// 跳转到商品详情
+			$('.shoes').on('click', '.shoe', function() {
+				var productid = $(this).children().eq(0).attr('data-id')
+				var productname = $(this).children().eq(2).text()
+				window.location.href = '{:url("index/Detail/index")}?productid=' + productid + '&productname=' + productname
+			})
+		})
+	</script>
+</body>
+</html>

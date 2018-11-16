@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="__ROOT__/static/layui/css/layui.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+			overflow-y: hidden;
+		}
+	</style>
+	<script type="text/javascript" src="__ROOT__/static/common/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div class="layui-form-item" style="margin-top: 5px">
+	    <label class="layui-form-label">类型名称:</label>
+	    <div class="layui-input-block">
+	      	<input id="typename" type="text" name="typename" required lay-verify="required" value="" autocomplete="off" class="layui-input">
+	    </div>
+	</div>
+  	<div class="layui-form-item layui-form-text">
+    	<label class="layui-form-label">类型说明:</label>
+    	<div class="layui-input-block">
+      		<textarea id="typenote" name="typenote" placeholder="" class="layui-textarea"></textarea>
+    	</div>
+  	</div>
+  	<div class="layui-form-item">
+    	<div class="layui-input-block">
+      		<button id="updatatype" class="layui-btn" lay-submit lay-filter="formDemo">确认添加</button>
+      		<button id="reset" class="layui-btn layui-btn-primary">重置</button>
+    	</div>
+  	</div>
+ 
+<script src="__ROOT__/static/layui/layui.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		$('#reset').on('click', function() {
+			$('#typename').val('')
+			$('#typenote').val('')
+		})
+
+		$('#updatatype').on('click', function() {
+			var typename = $('#typename').val()
+			var typenote = $('#typenote').val()
+			
+			$.ajax({
+				type: "POST",
+				url: "addnewtype",
+				data: "typename=" + typename + "&typenote=" + typenote,
+				success: function(data) {
+					if(data == 0) {
+						alert('添加失败，该名称已存在!')
+					} else {
+						window.location.href = 'index'
+					}
+				}
+			})
+		})
+	})
+</script>
+
+</body>
+</html>
